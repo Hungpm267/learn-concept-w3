@@ -1,0 +1,232 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "iPhone 15 Pro Max 256GB",
+      "price": 32990000,
+      "description": "Chip A17 Pro, khung Titan, camera zoom 5x.",
+      "imageUrl": "https://placehold.co/600x400/333/FFF?text=iPhone+15+Pro",
+      "category": "Điện tử"
+    },
+    {
+      "id": 2,
+      "name": "Laptop Dell XPS 15",
+      "price": 45500000,
+      "description": "Intel Core i9, 32GB RAM, 1TB SSD, màn hình OLED 3.5K.",
+      "imageUrl": "https://placehold.co/600x400/333/FFF?text=Dell+XPS+15",
+      "category": "Điện tử"
+    },
+    {
+      "id": 3,
+      "name": "Tai nghe Sony WH-1000XM5",
+      "price": 8490000,
+      "description": "Chống ồn chủ động hàng đầu, chất âm Hi-Res Audio.",
+      "imageUrl": "https://placehold.co/600x400/333/FFF?text=Sony+XM5",
+      "category": "Điện tử"
+    },
+    {
+      "id": 4,
+      "name": "Smartwatch Apple Watch 9",
+      "price": 10490000,
+      "description": "Chip S9 SiP, tính năng Double Tap, đo ECG và SpO2.",
+      "imageUrl": "https://placehold.co/600x400/333/FFF?text=Apple+Watch+9",
+      "category": "Điện tử"
+    },
+    {
+      "id": 5,
+      "name": "Bàn phím cơ Filco Majestouch",
+      "price": 3250000,
+      "description": "Switch Cherry MX Brown, build quality Nhật Bản.",
+      "imageUrl": "https://placehold.co/600x400/333/FFF?text=Filco+Keyboard",
+      "category": "Điện tử"
+    },
+    {
+      "id": 6,
+      "name": "Chuột Logitech MX Master 3S",
+      "price": 2490000,
+      "description": "Cảm biến 8K DPI, cuộn Magspeed, click siêu êm.",
+      "imageUrl": "https://placehold.co/600x400/333/FFF?text=Logitech+MX+3S",
+      "category": "Điện tử"
+    },
+    {
+      "id": 7,
+      "name": "Áo Thun Cotton Cơ Bản",
+      "price": 250000,
+      "description": "Chất liệu 100% cotton, thoáng mát, co giãn 4 chiều.",
+      "imageUrl": "https://placehold.co/600x400/555/FFF?text=Ao+Thun",
+      "category": "Thời trang"
+    },
+    {
+      "id": 8,
+      "name": "Quần Jeans Levi's 501",
+      "price": 1800000,
+      "description": "Dáng regular fit, chất vải denim cao cấp.",
+      "imageUrl": "https://placehold.co/600x400/555/FFF?text=Levis+501",
+      "category": "Thời trang"
+    },
+    {
+      "id": 9,
+      "name": "Giày Sneaker Nike Air Force 1",
+      "price": 2800000,
+      "description": "Thiết kế biểu tượng, đệm Air êm ái, màu trắng.",
+      "imageUrl": "https://placehold.co/600x400/555/FFF?text=Nike+AF1",
+      "category": "Thời trang"
+    },
+    {
+      "id": 10,
+      "name": "Áo khoác The North Face",
+      "price": 3500000,
+      "description": "Chống nước, giữ ấm, phù hợp dã ngoại.",
+      "imageUrl": "https://placehold.co/600x400/555/FFF?text=North+Face",
+      "category": "Thời trang"
+    },
+    {
+      "id": 11,
+      "name": "Balo Herschel Classic",
+      "price": 1200000,
+      "description": "Ngăn đựng laptop 15 inch, thiết kế tối giản.",
+      "imageUrl": "https://placehold.co/600x400/555/FFF?text=Herschel+Balo",
+      "category": "Thời trang"
+    },
+    {
+      "id": 12,
+      "name": "Kính râm Ray-Ban Aviator",
+      "price": 4500000,
+      "description": "Tròng kính G-15, gọng kim loại mạ vàng.",
+      "imageUrl": "https://placehold.co/600x400/555/FFF?text=RayBan",
+      "category": "Thời trang"
+    },
+    {
+      "id": 13,
+      "name": "Sách 'Clean Code'",
+      "price": 350000,
+      "description": "Tác giả Robert C. Martin, sách gối đầu giường của lập trình viên.",
+      "imageUrl": "https://placehold.co/600x400/777/FFF?text=Clean+Code",
+      "category": "Sách"
+    },
+    {
+      "id": 14,
+      "name": "Sách 'Atomic Habits'",
+      "price": 180000,
+      "description": "Tác giả James Clear, nghệ thuật xây dựng thói quen tốt.",
+      "imageUrl": "https://placehold.co/600x400/777/FFF?text=Atomic+Habits",
+      "category": "Sách"
+    },
+    {
+      "id": 15,
+      "name": "Sách 'Nhà Giả Kim'",
+      "price": 120000,
+      "description": "Tác giả Paulo Coelho, tiểu thuyết bán chạy nhất.",
+      "imageUrl": "https://placehold.co/600x400/777/FFF?text=Nha+Gia+Kim",
+      "category": "Sách"
+    },
+    {
+      "id": 16,
+      "name": "Nồi chiên không dầu Philips",
+      "price": 4190000,
+      "description": "Dung tích XXL 7.3L, công nghệ Rapid Air.",
+      "imageUrl": "https://placehold.co/600x400/888/FFF?text=Noi+Chien",
+      "category": "Gia dụng"
+    },
+    {
+      "id": 17,
+      "name": "Máy lọc không khí Xiaomi",
+      "price": 2990000,
+      "description": "Lọc bụi mịn PM2.5, điều khiển qua app Mi Home.",
+      "imageUrl": "https://placehold.co/600x400/888/FFF?text=May+Loc+KK",
+      "category": "Gia dụng"
+    },
+    {
+      "id": 18,
+      "name": "Robot hút bụi Ecovacs T9",
+      "price": 8900000,
+      "description": "Tự động giặt giẻ, điều hướng LiDAR.",
+      "imageUrl": "https://placehold.co/600x400/888/FFF?text=Robot+Hut+Bui",
+      "category": "Gia dụng"
+    },
+    {
+      "id": 19,
+      "name": "Máy pha cà phê Delonghi",
+      "price": 2200000,
+      "description": "Pha được Espresso và Cappuccino, áp suất 15 bar.",
+      "imageUrl": "https://placehold.co/600x400/888/FFF?text=May+Pha+Cafe",
+      "category": "Gia dụng"
+    },
+    {
+      "id": 20,
+      "name": "Tủ lạnh Samsung Inverter 300L",
+      "price": 9500000,
+      "description": "Công nghệ Digital Inverter, tiết kiệm điện, ngăn đông mềm.",
+      "imageUrl": "https://placehold.co/600x400/888/FFF?text=Tu+Lanh+SS",
+      "category": "Gia dụng"
+    },
+    {
+      "id": 21,
+      "name": "Thảm tập Yoga TPE",
+      "price": 300000,
+      "description": "Dày 6mm, chống trơn trượt, chất liệu TPE an toàn.",
+      "imageUrl": "https://placehold.co/600x400/999/FFF?text=Tham+Yoga",
+      "category": "Thể thao"
+    },
+    {
+      "id": 22,
+      "name": "Tạ tay 5kg (Bộ 2)",
+      "price": 450000,
+      "description": "Lõi gang bọc cao su, cầm chắc tay.",
+      "imageUrl": "https://placehold.co/600x400/999/FFF?text=Ta+Tay+5kg",
+      "category": "Thể thao"
+    },
+    {
+      "id": 23,
+      "name": "Xe đạp địa hình Giant",
+      "price": 7200000,
+      "description": "Khung nhôm, bộ đề Shimano 21 tốc độ.",
+      "imageUrl": "https://placehold.co/600x400/999/FFF?text=Xe+Dap+Giant",
+      "category": "Thể thao"
+    },
+    {
+      "id": 24,
+      "name": "Bóng rổ Molten BG5000",
+      "price": 1500000,
+      "description": "Tiêu chuẩn thi đấu FIBA, da PU cao cấp.",
+      "imageUrl": "https://placehold.co/600x400/999/FFF?text=Bong+Ro",
+      "category": "Thể thao"
+    },
+    {
+      "id": 25,
+      "name": "Vợt cầu lông Yonex Astrox 100",
+      "price": 3800000,
+      "description": "Nặng đầu, thân cứng, chuyên công.",
+      "imageUrl": "https://placehold.co/600x400/999/FFF?text=Yonex+Astrox",
+      "category": "Thể thao"
+    },
+    {
+      "id": 26,
+      "name": "Giày chạy bộ Asics Nimbus 25",
+      "price": 2900000,
+      "description": "Đệm PureGEL siêu êm, hỗ trợ chạy đường dài.",
+      "imageUrl": "https://placehold.co/600x400/999/FFF?text=Asics+Nimbus",
+      "category": "Thể thao"
+    },
+    {
+      "id": 27,
+      "name": "Máy chạy bộ tại nhà",
+      "price": 11500000,
+      "description": "Gấp gọn, động cơ 2.5HP, kết nối Bluetooth.",
+      "imageUrl": "https://placehold.co/600x400/999/FFF?text=May+Chay+Bo",
+      "category": "Thể thao"
+    }
+  ],
+  "cart": [
+    {
+      "id": 1,
+      "productId": 1,
+      "quantity": 1
+    },
+    {
+      "id": 2,
+      "productId": 2,
+      "quantity": 3
+    }
+  ]
+}

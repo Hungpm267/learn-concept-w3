@@ -1,5 +1,5 @@
 // api.ts
-import type { Todo, NewTodo } from "../interfaces/types";
+import type { Todo, NewTodo, Products, Carts } from "../interfaces/types";
 
 export const fetchTodos = async (): Promise<Todo[]> => {
   const response = await fetch("https://jsonplaceholder.typicode.com/todos");
@@ -72,3 +72,13 @@ export const updateTodo = async (
 
   return response.json();
 };
+
+
+export const fetchProducts = async(): Promise<Products[]> => {
+  const response = await fetch("http://localhost:3000/products");
+  return response.json();
+} 
+export const fetchCart = async(): Promise<Carts[]> => {
+  const response = await fetch("http://localhost:3000/cart?_expand=product")
+  return response.json();
+}

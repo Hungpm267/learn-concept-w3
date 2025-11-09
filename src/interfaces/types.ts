@@ -10,3 +10,19 @@ export interface Todo {
 export type NewTodo = {
   title: string;
 };
+
+export type Products = {
+  id: number;
+  name: string;
+  price: number;
+  description: string;
+  imageUrl: string;
+  category: string;
+}
+
+export type Carts = {
+  id: number;
+  productId: number;
+  quantity: number;
+  product?: Products;
+}

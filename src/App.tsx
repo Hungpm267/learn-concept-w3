@@ -7,29 +7,39 @@ import ReactCTL from "./pages/reactHookFormController";
 import { BearController } from "./pages/BearController";
 import { BearDisplay } from "./pages/BearDisplay";
 import TodosTable from "./pages/TodosTable";
+import { DashBoard } from "./pages/DashBoard";
 import TodosSuperTable from "./pages/TodosSuperTable";
+import { Cart } from "./pages/Cart";
 
 function App() {
   return (
     <div>
-      <h1>--- BÀI HỌC TanStack Table ---</h1>
-      <TodosSuperTable/>
-      
+      <h1>--- BÀI HỌC DASHBOARD ---</h1>
+      <p>=========================================================</p>
+      <DashBoard />
+      <p>=========================================================</p>
+      <Cart/>
+      <p>=========================================================</p>
+      <TodosSuperTable />
+      <p>=========================================================</p>
+
+      {/* <h1>--- BÀI HỌC TanStack Table ---</h1>
+      <TodosSuperTable />
+
       <p>=========================================================</p>
       <h1>--- BÀI HỌC TanStack Table ---</h1>
-      <TodosTable/>
+      <TodosTable />
 
       <p>=========================================================</p>
       <h1>--- BÀI HỌC ZUSTAND ---</h1>
       <BearController />
       <BearDisplay />
-      
+
       <p>=========================================================</p>
 
-      {/* Các component cũ của bạn */}
       <TanStackQuery />
       <p>=========================================================</p>
-      <ReactCTL />
+      <ReactCTL /> */}
     </div>
   );
 }
