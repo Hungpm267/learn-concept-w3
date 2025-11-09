@@ -13,7 +13,7 @@ import { Cart } from "./pages/Cart";
 
 function App() {
   return (
-    <div>
+    <div className=" flex flex-col items-center">
       <h1>--- BÀI HỌC DASHBOARD ---</h1>
       <p>=========================================================</p>
       <DashBoard />

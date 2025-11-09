@@ -1,6 +1,5 @@
 import { type Carts } from "@/interfaces/types";
-import { useQuery } from "@tanstack/react-query";
-import { fetchCart } from "@/api/api";
+import { useCartStore } from "@/store/useCartStore";
 import { useReactTable, type ColumnDef, getCoreRowModel, flexRender } from "@tanstack/react-table";
 
 const columns: ColumnDef<Carts>[] = [
@@ -33,14 +32,14 @@ const columns: ColumnDef<Carts>[] = [
     // Dùng 'cell' để render một thẻ <img>
     cell: ({ row }) => {
       // row.original là data của cả hàng đó (tương ứng 1 item trong Carts[])
-      const imageUrl = row.original.product.imageUrl;
-      const productName = row.original.product.name;
+      const imageUrl = row.original.product?.imageUrl;
+      const productName = row.original.product?.name;
 
       return (
         <img
           src={imageUrl}
           alt={productName}
-          className="w-16 h-16 object-cover rounded" // Thêm class (Tailwind) để giới hạn kích thước
+          className="w-30 h-16 object-cover rounded" // Thêm class (Tailwind) để giới hạn kích thước
         />
       );
     },
@@ -49,26 +48,61 @@ const columns: ColumnDef<Carts>[] = [
     accessorKey: "product.category",
     header: "product_category",
   },
+  {
+    id: "action", // Thêm một id duy nhất cho cột này
+    header: "Action",
+    // Dùng 'cell' để render nội dung cho ô (<td>)
+    cell: ({ row }) => {
+      // 'row.original' sẽ chứa toàn bộ dữ liệu của sản phẩm ở hàng đó
+      const myproduct = row.original;
+
+      // Hàm xử lý khi nhấn nút
+      const handleDeleteClick = () => {
+        console.log("Xóa sản phẩm:", myproduct.product?.name, myproduct.id);
+        // Đây là nơi bạn sẽ gọi hàm từ store Zustand để thêm sản phẩm vào giỏ hàng
+        // Ví dụ: useCartStore.getState().addProduct(product);
+      };
+
+      return (
+        <button
+          onClick={handleDeleteClick}
+          className="bg-red-500 hover:bg-blue-700 text-white text-sm py-1 px-2 rounded"
+        >
+          Xóa
+        </button>
+      );
+    },
+  },
 ];
 
 export function Cart() {
+  // BỎ useQuery
+  /*
   const { isPending, error, data } = useQuery<Carts[]>({
-    queryKey: ["products"],
+    queryKey: ["cart"], // (Bạn nên sửa thành ["cart"] như tôi nói ở lần trước)
     queryFn: fetchCart,
   });
+  */
+  
+  // THAY BẰNG VIỆC ĐỌC TỪ ZUSTAND
+  const data = useCartStore((state) => state.cartItems);
+
   const table = useReactTable({
-    data: data ?? [],
+    data: data ?? [], // data bây giờ là từ Zustand
     columns: columns,
     getCoreRowModel: getCoreRowModel(),
   });
 
-  if (isPending) return "is Loading...";
-  if (error) return "An error occurred " + error.message;
+  // Bỏ isPending và error (vì Zustand luôn có data, ít nhất là mảng rỗng)
+  // if (isPending) return "is Loading...";
+  // if (error) return "An error occurred " + error.message;
+
   return (
     <div>
-      <h1 className=" font-bold text-4xl m-8 text-rose-500">Carts Table</h1>
+      <h1 className=" font-bold text-4xl m-8 text-rose-500">Carts Table (Zustand)</h1>
       <table className="border p-2 ">
-        <thead>
+        {/* ... (Phần <thead> và <tbody> giữ nguyên) ... */}
+         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
@@ -97,3 +131,4 @@ export function Cart() {
     </div>
   );
 }
+

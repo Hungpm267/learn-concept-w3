@@ -13,3 +13,6 @@ export const useBearStore = create<BearState>((set) => ({
   decreaseBear: () => set((state) => ({ bears: state.bears - 1 })),
   removeAllBears: () => set({ bears: 0 }),
 }));
+
+
+

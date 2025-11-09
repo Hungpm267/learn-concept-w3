@@ -9,6 +9,7 @@ import {
   flexRender,
 } from "@tanstack/react-table";
 import { useState } from "react";
+import { useCartStore } from "@/store/useCartStore";
 
 const columns: ColumnDef<Products>[] = [
   {
@@ -31,8 +32,8 @@ const columns: ColumnDef<Products>[] = [
   {
     header: "Image",
     // Bạn có thể giữ accessorKey hoặc bỏ đi nếu dùng cell phức tạp
-    accessorKey: "imageUrl", 
-    
+    accessorKey: "imageUrl",
+
     // Dùng 'cell' để render một thẻ <img>
     cell: ({ row }) => {
       // row.original là data của cả hàng đó (tương ứng 1 item trong Carts[])
@@ -40,9 +41,9 @@ const columns: ColumnDef<Products>[] = [
       const productName = row.original.name;
 
       return (
-        <img 
-          src={imageUrl} 
-          alt={productName} 
+        <img
+          src={imageUrl}
+          alt={productName}
           className="w-30 h-16 object-cover rounded" // Thêm class (Tailwind) để giới hạn kích thước
         />
       );
@@ -53,18 +54,18 @@ const columns: ColumnDef<Products>[] = [
     header: "Category",
   },
   {
-    id: "action", // Thêm một id duy nhất cho cột này
+    id: "action",
     header: "Action",
-    // Dùng 'cell' để render nội dung cho ô (<td>)
     cell: ({ row }) => {
-      // 'row.original' sẽ chứa toàn bộ dữ liệu của sản phẩm ở hàng đó
       const product = row.original;
 
-      // Hàm xử lý khi nhấn nút
+      // 2. LẤY ACTION TỪ STORE
+      const addProductToCart = useCartStore((state) => state.addProduct);
+
       const handleAddClick = () => {
-        console.log("Thêm sản phẩm:", product.name, product.id);
-        // Đây là nơi bạn sẽ gọi hàm từ store Zustand để thêm sản phẩm vào giỏ hàng
-        // Ví dụ: useCartStore.getState().addProduct(product);
+        // 3. GỌI ACTION KHI CLICK
+        addProductToCart(product);
+        console.log("Đã thêm vào giỏ hàng (Zustand):", product.name);
       };
 
       return (
@@ -78,7 +79,6 @@ const columns: ColumnDef<Products>[] = [
     },
   },
 ];
-
 export function DashBoard() {
   const { isPending, error, data } = useQuery<Products[]>({
     queryKey: ["products"],
@@ -105,7 +105,7 @@ export function DashBoard() {
   if (error) return "An error occurred " + error.message;
 
   return (
-    <div className=" flex flex-col items-center">
+    <div>
       <h1 className=" font-bold text-4xl m-8 text-rose-500">Products Table</h1>
       <table className="border p-2 ">
         <thead>
