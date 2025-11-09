@@ -8,13 +8,13 @@ import { fetchTodos } from "@/api/api";
 import {
   // Hook chính
   useReactTable,
-  
+
   // Các hàm tiện ích
   getCoreRowModel,
   flexRender,
-  
+
   // Các kiểu (Types)
-  type ColumnDef, 
+  type ColumnDef,
 } from "@tanstack/react-table";
 
 // 2. ĐỊNH NGHĨA CÁC CỘT (COLUMNS)
@@ -27,7 +27,7 @@ console.log("gia tri mang la: ", columnstr);
 const columns: ColumnDef<Todo>[] = [
   {
     accessorKey: "id", // Lấy key 'id' từ data `Todo`
-    header: "ID",     // Tiêu đề của cột
+    header: "ID", // Tiêu đề của cột
   },
   {
     accessorKey: "userId",
@@ -40,7 +40,7 @@ const columns: ColumnDef<Todo>[] = [
   {
     accessorKey: "completed",
     header: "Trạng thái",
-    
+
     // Bạn có thể tùy chỉnh nội dung ô (cell)
     cell: (info) => {
       const isCompleted = info.getValue() as boolean;
@@ -51,7 +51,6 @@ const columns: ColumnDef<Todo>[] = [
 
 // 3. TẠO COMPONENT
 function TodosTable() {
-  
   // Bước A: Lấy dữ liệu (Giống hệt TanStackQuery.tsx)
   const { isPending, error, data } = useQuery<Todo[]>({
     queryKey: ["todos"],
@@ -61,7 +60,7 @@ function TodosTable() {
   // Bước B: Khởi tạo Table bằng hook `useReactTable`
   const table = useReactTable({
     // `data ?? []` để xử lý trường hợp data đang undefined
-    data: data ?? [], 
+    data: data ?? [],
     columns: columns, // Cấu hình cột bạn vừa định nghĩa
     getCoreRowModel: getCoreRowModel(), // Hàm này bắt buộc để lấy logic cốt lõi
   });
@@ -73,24 +72,22 @@ function TodosTable() {
   // Bước C: Render ra HTML
   // Đây là phần "headless" - bạn tự viết JSX
   return (
-    <div style={{ padding: '20px' }}>
-      <h1 style={{ fontSize: '2em', marginBottom: '10px' }}>Bảng Todos (TanStack Table)</h1>
-      
+    <div style={{ padding: "20px" }}>
+      <h1 style={{ fontSize: "2em", marginBottom: "10px" }}>
+        Bảng Todos (TanStack Table)
+      </h1>
+
       {/* Thêm class của Tailwind để có đường viền */}
       <table className="border-collapse border border-slate-400 w-full text-left">
         <thead className="bg-slate-100">
           {/* Lấy các nhóm header (thường chỉ có 1) */}
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
-              
               {/* Lấy từng header trong nhóm */}
               {headerGroup.headers.map((header) => (
                 <th key={header.id} className="border border-slate-300 p-2">
                   {/* flexRender sẽ render nội dung của header */}
-                  {flexRender(
-                    header.column.columnDef.header,
-                    header.getContext()
-                  )}
+                  {flexRender(header.column.columnDef.header, header.getContext())}
                 </th>
               ))}
             </tr>
@@ -101,7 +98,6 @@ function TodosTable() {
           {/* Lấy model của các hàng */}
           {table.getRowModel().rows.map((row) => (
             <tr key={row.id} className="hover:bg-slate-50">
-              
               {/* Lấy từng ô trong hàng */}
               {row.getVisibleCells().map((cell) => (
                 <td key={cell.id} className="border border-slate-300 p-2">
