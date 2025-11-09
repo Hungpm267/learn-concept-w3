@@ -10,6 +10,7 @@ import TodosTable from "./pages/TodosTable";
 import { DashBoard } from "./pages/DashBoard";
 import TodosSuperTable from "./pages/TodosSuperTable";
 import { Cart } from "./pages/Cart";
+import { CheckoutForm } from "./pages/CheckoutForm";
 
 function App() {
   return (
@@ -19,6 +20,8 @@ function App() {
       <DashBoard />
       <p>=========================================================</p>
       <Cart/>
+      <p>=========================================================</p>
+      <CheckoutForm /> {/* <-- THÊM DÒNG NÀY */}
       <p>=========================================================</p>
       <TodosSuperTable />
       <p>=========================================================</p>

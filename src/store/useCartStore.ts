@@ -1,15 +1,16 @@
-import {create} from "zustand";
+import { create } from "zustand";
 import { type Carts, type Products } from "@/interfaces/types";
 
-
 type CartState = {
-    cartItems: Carts[];
-    addProduct: (product: Products) => void;
-}
+  cartItems: Carts[];
+  addProduct: (product: Products) => void;
+  removeProduct: (cartItemId: number) => void;
+  clearCart: () => void; // dọn dẹp giỏ hàng sau khi thanh toán thành công
+};
 
 export const useCartStore = create<CartState>((set) => ({
-    cartItems: [],
-    addProduct: (productToAdd) =>
+  cartItems: [],
+  addProduct: (productToAdd) =>
     set((state) => {
       // 1. Kiểm tra xem sản phẩm đã có trong giỏ hàng chưa
       const existingItem = state.cartItems.find(
@@ -40,4 +41,11 @@ export const useCartStore = create<CartState>((set) => ({
         cartItems: [...state.cartItems, newItem],
       };
     }),
-}))
+  // <-- THÊM HÀM NÀY
+  // Action: Xóa một item khỏi giỏ hàng
+  removeProduct: (cartItemId) =>
+    set((state) => ({
+      cartItems: state.cartItems.filter((item) => item.id !== cartItemId),
+    })),
+  clearCart: () => set({ cartItems: [] }),
+}));

@@ -49,24 +49,23 @@ const columns: ColumnDef<Carts>[] = [
     header: "product_category",
   },
   {
-    id: "action", // Thêm một id duy nhất cho cột này
+    id: "action",
     header: "Action",
-    // Dùng 'cell' để render nội dung cho ô (<td>)
     cell: ({ row }) => {
-      // 'row.original' sẽ chứa toàn bộ dữ liệu của sản phẩm ở hàng đó
       const myproduct = row.original;
+      // Lấy action 'removeProduct' từ store
+      const removeProduct = useCartStore((state) => state.removeProduct);
 
-      // Hàm xử lý khi nhấn nút
       const handleDeleteClick = () => {
         console.log("Xóa sản phẩm:", myproduct.product?.name, myproduct.id);
-        // Đây là nơi bạn sẽ gọi hàm từ store Zustand để thêm sản phẩm vào giỏ hàng
-        // Ví dụ: useCartStore.getState().addProduct(product);
+        // Gọi action với ID của cart item (myproduct.id)
+        removeProduct(myproduct.id);
       };
 
       return (
         <button
           onClick={handleDeleteClick}
-          className="bg-red-500 hover:bg-blue-700 text-white text-sm py-1 px-2 rounded"
+          className="bg-red-500 hover:bg-red-700 text-white text-sm py-1 px-2 rounded"
         >
           Xóa
         </button>
