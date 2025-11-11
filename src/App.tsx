@@ -2,7 +2,6 @@
 
 import TanStackQuery from "./pages/TanStackQuery";
 import ReactCTL from "./pages/reactHookFormController";
-
 // 1. Import 2 component Zustand mới
 import { BearController } from "./pages/BearController";
 import { BearDisplay } from "./pages/BearDisplay";
@@ -11,26 +10,26 @@ import { DashBoard } from "./pages/DashBoard";
 import TodosSuperTable from "./pages/TodosSuperTable";
 import { Cart } from "./pages/Cart";
 import { CheckoutForm } from "./pages/CheckoutForm";
+import { Toaster } from "@/components/ui/sonner";
 
 function App() {
   return (
     <div className=" flex flex-col items-center">
+      <Toaster position="top-center" />
+
       <h1>--- BÀI HỌC DASHBOARD ---</h1>
       <p>=========================================================</p>
       <DashBoard />
       <p>=========================================================</p>
-      <Cart/>
+      <Cart />
       <p>=========================================================</p>
-      <CheckoutForm /> {/* <-- THÊM DÒNG NÀY */}
+      <CheckoutForm />
       <p>=========================================================</p>
+      <h1>--- TodosSuperTable ---</h1>
       <TodosSuperTable />
       <p>=========================================================</p>
 
-      {/* <h1>--- BÀI HỌC TanStack Table ---</h1>
-      <TodosSuperTable />
-
-      <p>=========================================================</p>
-      <h1>--- BÀI HỌC TanStack Table ---</h1>
+      <h1>--- BÀI HỌC TanStack Table - TodosTable ---</h1>
       <TodosTable />
 
       <p>=========================================================</p>
@@ -42,7 +41,9 @@ function App() {
 
       <TanStackQuery />
       <p>=========================================================</p>
-      <ReactCTL /> */}
+      <ReactCTL />
+
+      
     </div>
   );
 }

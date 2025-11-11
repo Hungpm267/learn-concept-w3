@@ -2,14 +2,30 @@ import { useQuery } from "@tanstack/react-query";
 import { fetchProducts } from "@/api/api";
 import { type Products } from "@/interfaces/types";
 import {
-  getCoreRowModel,
   useReactTable,
-  type ColumnDef,
-  getPaginationRowModel,
+  getCoreRowModel,
   flexRender,
+
+  // Sắp xếp (Sorting)
+  getSortedRowModel,
+  type SortingState,
+
+  // Lọc (Filtering)
+  getFilteredRowModel,
+  type ColumnFiltersState,
+
+  // Phân trang (Pagination)
+  getPaginationRowModel,
+  type ColumnDef,
 } from "@tanstack/react-table";
 import { useState } from "react";
 import { useCartStore } from "@/store/useCartStore";
+// import toast, { Toaster } from "react-hot-toast";
+import { toast } from "sonner";
+
+
+// const notify = () =>
+//   toast.success("Thêm sản phẩm thành công.");
 
 const columns: ColumnDef<Products>[] = [
   {
@@ -32,7 +48,7 @@ const columns: ColumnDef<Products>[] = [
   {
     header: "Image",
     // Bạn có thể giữ accessorKey hoặc bỏ đi nếu dùng cell phức tạp
-    accessorKey: "imageUrl",
+    // accessorKey: "imageUrl",
 
     // Dùng 'cell' để render một thẻ <img>
     cell: ({ row }) => {
@@ -68,13 +84,21 @@ const columns: ColumnDef<Products>[] = [
         console.log("Đã thêm vào giỏ hàng (Zustand):", product.name);
       };
 
+      // const notify = () =>
+      //   toast.success(`Thêm sản phẩm ${product.name} thành công.`, { duration: 1000 });
+
       return (
-        <button
-          onClick={handleAddClick}
-          className="bg-blue-500 hover:bg-blue-700 text-white text-sm py-1 px-2 rounded"
-        >
-          Thêm
-        </button>
+        <>
+          <button
+            onClick={() => {
+              handleAddClick();
+              toast.success(`Thêm sản phẩm ${product.name} thành công.`);
+            }}
+            className="bg-blue-500 hover:bg-blue-700 text-white text-sm py-1 px-2 rounded"
+          >
+            Thêm
+          </button>
+        </>
       );
     },
   },
@@ -84,39 +108,75 @@ export function DashBoard() {
     queryKey: ["products"],
     queryFn: fetchProducts,
   });
+  const [sorting, setSorting] = useState<SortingState>([]);
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [pagination, setPagination] = useState({
     pageIndex: 0,
     pageSize: 7,
   });
+
   const table = useReactTable({
     data: data ?? [],
     columns: columns,
     getCoreRowModel: getCoreRowModel(),
 
+    // --- Nối state và handlers ---
+
+    // Sắp xếp
     state: {
+      sorting: sorting,
+      columnFilters: columnFilters,
       pagination: pagination,
     },
-    //paging
-    onPaginationChange: setPagination,
-    getPaginationRowModel: getPaginationRowModel(), // Bật logic phân trang
-  });
 
+    // Lọc
+    onSortingChange: setSorting,
+    onColumnFiltersChange: setColumnFilters,
+    onPaginationChange: setPagination,
+
+    // --- Thêm các "pipeline" (hàm get) ---
+    getSortedRowModel: getSortedRowModel(), // Thêm Sắp xếp
+    getFilteredRowModel: getFilteredRowModel(), // Thêm Lọc
+    getPaginationRowModel: getPaginationRowModel(), // Thêm Phân trang
+  });
   if (isPending) return "is Loading...";
   if (error) return "An error occurred " + error.message;
 
   return (
     <div>
       <h1 className=" font-bold text-4xl m-8 text-rose-500">Products Table</h1>
+      <div className="flex gap-4 mb-4">
+        <input
+          placeholder="Lọc 'Tên SP'..."
+          value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
+          onChange={(e) =>
+            table.getColumn("name")?.setFilterValue(e.target.value)
+          }
+          className="border p-2 rounded"
+        />
+      </div>
       <table className="border p-2 ">
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
-                <th className="border p-2 " key={header.id}>
-                  {flexRender(
-                    header.column.columnDef.header,
-                    header.getContext()
-                  )}
+                <th key={header.id} className="border border-slate-300 p-2">
+                  {/* Thêm sự kiện onClick để Sắp xếp */}
+                  <div
+                    onClick={header.column.getToggleSortingHandler()}
+                    className="cursor-pointer select-none"
+                  >
+                    {flexRender(
+                      header.column.columnDef.header,
+                      header.getContext()
+                    )}
+
+                    {/* Hiển thị mũi tên Sắp xếp */}
+                    {{
+                      asc: " (tăng dần🔼)",
+                      desc: " (giảm dần🔽)",
+                    }[header.column.getIsSorted() as string] ?? null}
+                  </div>
                 </th>
               ))}
             </tr>

@@ -1,6 +1,15 @@
 import { type Carts } from "@/interfaces/types";
 import { useCartStore } from "@/store/useCartStore";
-import { useReactTable, type ColumnDef, getCoreRowModel, flexRender } from "@tanstack/react-table";
+import {
+  useReactTable,
+  type ColumnDef,
+  getCoreRowModel,
+  flexRender,
+} from "@tanstack/react-table";
+import { toast } from "sonner";
+
+
+const notify = () => toast.success("Xóa khỏi cart thành công.", {duration:1000});
 
 const columns: ColumnDef<Carts>[] = [
   {
@@ -62,13 +71,21 @@ const columns: ColumnDef<Carts>[] = [
         removeProduct(myproduct.id);
       };
 
+      // const notify = () =>
+      //   toast.success(`Xóa sản phẩm ${myproduct.product?.name} thành công.`);
+
       return (
-        <button
-          onClick={handleDeleteClick}
-          className="bg-red-500 hover:bg-red-700 text-white text-sm py-1 px-2 rounded"
-        >
-          Xóa
-        </button>
+        <>
+          <button
+            onClick={() => {
+              handleDeleteClick();
+              toast(`Xóa sản phẩm ${myproduct.product?.name} thành công.`);
+            }}
+            className="bg-red-500 hover:bg-red-700 text-white text-sm py-1 px-2 rounded"
+          >
+            Xóa
+          </button>
+        </>
       );
     },
   },
@@ -82,7 +99,7 @@ export function Cart() {
     queryFn: fetchCart,
   });
   */
-  
+
   // THAY BẰNG VIỆC ĐỌC TỪ ZUSTAND
   const data = useCartStore((state) => state.cartItems);
 
@@ -98,10 +115,12 @@ export function Cart() {
 
   return (
     <div>
-      <h1 className=" font-bold text-4xl m-8 text-rose-500">Carts Table (Zustand)</h1>
+      <h1 className=" font-bold text-4xl m-8 text-rose-500">
+        Carts Table (Zustand)
+      </h1>
       <table className="border p-2 ">
         {/* ... (Phần <thead> và <tbody> giữ nguyên) ... */}
-         <thead>
+        <thead>
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
@@ -130,4 +149,3 @@ export function Cart() {
     </div>
   );
 }
-

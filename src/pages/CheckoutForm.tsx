@@ -16,10 +16,10 @@ export function CheckoutForm() {
   const clearCart = useCartStore((state) => state.clearCart);
 
   // 3. Tính tổng tiền (dùng .reduce() là một kỹ thuật JS nâng cao)
-  const totalPrice = cartItems.reduce((total, item) => {
+  const totalPrice = cartItems.reduce((accumulator, currentValue) => {
     // Dùng optional chaining `?.` để tránh lỗi
-    const price = item.product?.price || 0;
-    return total + price * item.quantity;
+    const price = currentValue.product?.price || 0;
+    return accumulator + price * currentValue.quantity;
   }, 0);
 
   // 4. Khởi tạo React Hook Form
@@ -28,7 +28,7 @@ export function CheckoutForm() {
     handleSubmit,
     formState: { errors },
     reset, // Hàm để reset lại form sau khi submit
-  } = useForm<FormInputs>();
+  } = useForm<FormInputs>();  
 
   // 5. Hàm này sẽ chạy KHI DỮ LIỆU FORM HỢP LỆ
   const onSubmit: SubmitHandler<FormInputs> = (data) => {
@@ -53,14 +53,12 @@ export function CheckoutForm() {
 
   // 7. Render JSX
   return (
-    <div className="flex flex-col items-center p-8 border-t-2 mt-8">
-      <h1 className="font-bold text-4xl m-8 text-green-500">
-        Form Thanh Toán
-      </h1>
+    <div className="flex flex-col items-center p-8 border-t-8 border-b-8 mt-8">
+      <h1 className="font-bold text-4xl m-8 text-green-500">Form Thanh Toán</h1>
       <h2 className="text-2xl font-bold mb-4">
         Tổng tiền: {totalPrice.toLocaleString("vi-VN")} VNĐ
       </h2>
-
+      
       {/* Thông báo nếu giỏ hàng rỗng */}
       {cartItems.length === 0 && (
         <p className="text-gray-500">
@@ -114,9 +112,7 @@ export function CheckoutForm() {
           />
           {/* errors.email?.message sẽ hiển thị thông báo lỗi cụ thể */}
           {errors.email && (
-            <span className="text-red-500 text-sm">
-              {errors.email.message}
-            </span>
+            <span className="text-red-500 text-sm">{errors.email.message}</span>
           )}
         </div>
 
@@ -131,9 +127,7 @@ export function CheckoutForm() {
             {...register("diaChi", { required: true })}
           />
           {errors.diaChi && (
-            <span className="text-red-500 text-sm">
-              Vui lòng nhập địa chỉ.
-            </span>
+            <span className="text-red-500 text-sm">Vui lòng nhập địa chỉ.</span>
           )}
         </div>
 
