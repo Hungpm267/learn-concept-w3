@@ -14,7 +14,7 @@ type AuthContextType = {
   user: User | null; // Thông tin user
   token: string | null; // Authentication token
   isLoading: boolean; // Trạng thái chờ (cho login/logout)
-  login: (username: string) => Promise<void>; // Hàm login
+  login: (username: string, password:string) => Promise<void>; // Hàm login
   logout: () => Promise<void>; // Hàm logout
 };
 
@@ -37,14 +37,17 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   // 5. Định nghĩa các hàm (methods)
   // [cite: 114] Hỗ trợ flow bất đồng bộ
-  const login = async (username: string) => {
+  const login = async (username: string, password:string) => {
     setIsLoading(true);
     try {
-      // Gọi API (chúng ta truyền API vào đây, theo yêu cầu [cite: 97])
-      const { user: apiUser, token: apiToken } = await loginApi({ username });
+      if (password){
+        // Gọi API (chúng ta truyền API vào đây, theo yêu cầu [cite: 97])
+        const { user: apiUser, token: apiToken } = await loginApi({ username });
 
-      setUser(apiUser);
-      setToken(apiToken);
+        setUser(apiUser);
+        setToken(apiToken);
+      }
+   
 
       // (Nâng cao) Bạn có thể lưu token vào localStorage ở đây
       // [cite: 115]

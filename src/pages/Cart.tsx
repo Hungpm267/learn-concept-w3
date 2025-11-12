@@ -9,7 +9,7 @@ import {
 import { toast } from "sonner";
 
 
-const notify = () => toast.success("Xóa khỏi cart thành công.", {duration:1000});
+// const notify = () => toast.success("Xóa khỏi cart thành công.", {duration:1000});
 
 const columns: ColumnDef<Carts>[] = [
   {

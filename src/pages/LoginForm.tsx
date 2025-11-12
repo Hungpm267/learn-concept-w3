@@ -20,26 +20,13 @@ export function LoginForm() {
 
   // 4. Hàm onSubmit sẽ gọi hàm 'login' từ context
   const onSubmit: SubmitHandler<FormInputs> = async (data) => {
-    try {
-      // Gọi hàm login từ context với username và password
-      await login(data.username, data.password);
-      // Bạn không cần làm gì ở đây cả, vì AuthProvider
-      // sẽ tự động cập nhật state và component App sẽ re-render
-    } catch (err) {
-      // (Nâng cao) Nếu hàm login của bạn ném ra lỗi (ví dụ: sai pass)
-      // bạn có thể bắt lỗi đó ở đây
-      console.error("Login thất bại:", err);
-      alert("Đăng nhập thất bại!");
-    }
+    await login(data.username, data.password);
   };
 
   return (
     <div className="p-4 border rounded-md">
       <h2 className="text-2xl font-bold mb-4">Đăng nhập</h2>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col space-y-3"
-      >
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col space-y-3">
         <div>
           <label htmlFor="username">Username</label>
           <input
